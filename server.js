@@ -1,17 +1,18 @@
-const express = require('express');
+const express = require("express"); 
+// instantiates Express
 const app = express();
-const path = require('path');
+// for serving files in the public folder, such as CSS files
+app.use(express.static("./public"));
+// server responds when the client sends a GET request for the / endpoint
 
-// Set the directory for static files like HTML, CSS, and JavaScript
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Define a route to serve your HTML file
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get("/", function(req,res) {
+    res.sendFile(__dirname + "/index.html");
+});
+app.post("/", function(req,res) {
+     res.sendFile(__dirname + "/index2.html");
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+
+app.listen(process.env.PORT || 3000, function() {
+    console.log(`Server is running on port ${process.env.PORT}.`);
 });
